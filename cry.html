@@ -1,0 +1,91 @@
+<html lang="eng">
+	<head>
+		<meta charset="utf-8">
+		<title>
+			Bar created by d3.js
+		</title>
+		<script type="text/javascript" src="http://d3js.org/d3.v3.min.js">
+		</script>
+	</head>
+	
+	<body>
+		<p> Hey, try to click here</p>
+		<script>
+			var h=300
+			var w=500
+			var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+			
+
+			var dataset=[8,10,34,54,23,34,28,29,15,8,37,4,46]
+			var xScale=d3.scale.ordinal()
+			.domain(d3.range(dataset.length))
+			.rangeRoundBands([0,w],0.05)
+			
+			var yScale=d3.scale.linear()
+			.domain([0,d3.max(dataset)])
+			.range([0,h])
+			
+			var bar=svg.selectAll("rect")
+			.data(dataset)
+			.enter()
+			.append("rect")
+			.attr("x",function(d,i){return xScale(i)})
+			.attr("y",function(d){return h-Math.floor(yScale(d));})
+			.attr("height",function(d){return Math.floor(yScale(d))})
+			.attr("width", xScale.rangeBand())
+			.attr("fill",function(d){return "rgb(0,0,"+(d*5+80)+")";})
+			
+			var texts=svg.selectAll("text")
+			.data(dataset)
+			.enter()
+			.append("text")
+			.text(function(d){return d;})
+			.attr("x",function(d,i){return xScale(i);})
+			.attr("y",function(d){return h-Math.floor(yScale(d))+14;})
+			.attr("fill","white")
+			
+			d3.select("p")
+			.on("click",function(){
+				var newdata=[];
+				for(var i=0; i< dataset.length;i++){
+				newdata.push(Math.floor(50*Math.random()));}
+				dataset= newdata;
+
+        //Update all rects
+				svg.selectAll("rect")
+           			.data(dataset)
+				.transition()
+				.duration(3000)
+				.ease("elastic")
+				.delay(function(d,i){return 500*i/dataset.length})
+           			.attr("y", function(d) {
+                		return h - yScale(d);
+           			})
+           			.attr("height", function(d) {
+                		return yScale(d);
+           			});
+			svg.selectAll("text")
+   .data(dataset)
+   .transition()        // <-- This is new,
+   .duration(3000)//     and so is this.
+			.delay(function(d,i){return 500/dataset.length*i})
+			.ease("elastic")
+   .text(function(d) {
+        return d;
+   })
+   .attr("x", function(d, i) {
+        return xScale(i) + xScale.rangeBand() / 2;
+   })
+   .attr("y", function(d) {
+        return h - yScale(d) + 14;
+   });
+			})
+			
+		
+			
+		</script>
+	</body>
+</html>

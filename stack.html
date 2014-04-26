@@ -1,0 +1,71 @@
+
+<!DOCUTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title> D3 Page Template</title>
+				
+		<script type="text/javascript" src="http://d3js.org/d3.v3.min.js">
+		</script>
+		
+			
+<!--<link rel="stylesheet" href="style.css"> -->
+			
+	</head>
+	<body>
+
+		<script>
+var dataset = [
+        [
+                { x: 0, y: 5 },
+                { x: 1, y: 4 },
+                { x: 2, y: 2 },
+                { x: 3, y: 7 },
+                { x: 4, y: 23 }
+        ],
+        [
+                { x: 0, y: 10 },
+                { x: 1, y: 12 },
+                { x: 2, y: 19 },
+                { x: 3, y: 23 },
+                { x: 4, y: 17 }
+        ],
+        [
+                { x: 0, y: 22 },
+                { x: 1, y: 28 },
+                { x: 2, y: 32 },
+                { x: 3, y: 35 },
+                { x: 4, y: 43 }
+        ]
+];
+			var stack = d3.layout.stack()
+			stack(dataset) //reference of dataset? change the dataset?
+			var groups=d3.select("body")
+			.append("svg")
+			.attr("width",300)
+			.attr("height",500)
+			.data(dataset)
+			
+			var rects = groups.selectAll("rect")
+        	.data(function(d) { return d; })
+        	.enter()
+        	.append("rect")
+        	.attr("x", function(d, i) {
+                return 10*i;
+        	})
+        	.attr("y", function(d,i) {
+                return d.y0*2+20+i;
+        	})
+        	.attr("height", function(d) {
+                return d.y*2+20;
+        	})
+        	.attr("width", 9)
+			.attr("fill",function(d,i){return "rgb(0,0,"+(30*i)+")";});
+
+		</script>
+		
+
+	
+	</body>
+</html>
+

@@ -1,0 +1,69 @@
+
+<!DOCUTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title> Pies</title>
+				
+		<script type="text/javascript" src="http://d3js.org/d3.v3.min.js">
+		</script>
+		
+			
+<!--<link rel="stylesheet" href="style.css"> -->
+			
+	</head>
+	<body>
+		<script>
+			var dataset=[24,12,43,23,7,46,9,11,32]
+			var outR=200
+			var inR=110
+			var arc=d3.svg.arc()
+			.innerRadius(inR)
+			.outerRadius(outR)
+			var color=d3.scale.category10()
+			var color_arc="black"
+			
+			var pie = d3.layout.pie()
+			var w=500
+			var h=600
+			var svg=d3.select("body")
+			.append("svg")
+			.attr("height",h)
+			.attr("width",w)
+			
+			var arcs=svg.selectAll("g.arc")
+			.data(pie(dataset))
+			.enter()
+			.append("g")
+			.attr("class","arc")
+			.attr("transform","translate("+outR+","+outR+")")
+			
+			arcs.append("path")
+			.attr("d",arc)
+			.attr("fill",function(d,i){return "rgb(0,"+(10+40*i)+",0)";})
+			
+			arcs.selectAll("path")
+			.on("mouseover",function(){
+				color_arc = d3.select(this).attr("fill")
+			d3.select(this)
+			.attr("fill","yellow")
+			})
+			.on("mouseout",function(){
+			d3.select(this)
+			.attr("fill",color_arc)
+			})
+			
+			arcs.append("text")
+			.attr("id","tooltip")
+			.attr("transform",function(d){return "translate("+ arc.centroid(d)+")";})
+			.attr("fill","white")
+			.attr("text-anchor", "middle")
+			.text(function(d){return d.value})
+		
+		</script>
+		
+
+	
+	</body>
+</html>
+
