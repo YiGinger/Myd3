@@ -17,18 +17,5 @@ I get the [data source](https://raw.githubusercontent.com/YiGinger/Myd3/master/C
 This is the link of the new graph I've worked on. If the mouse is over one bar, then the pie graph next to the stack bar will display the data of that bar.
 [the graph](http://yiginger.github.io/Myd3/)
 
-<h2>Example of code</h2>
-
-            <pre>
-                <div class="container">
-                    <div class="block two first">
-                        <h2>Your title</h2>
-                        <div class="wrap">
-                            //Your content
-                        </div>
-                    </div>
-                </div>
-            </pre>
-
 
 
