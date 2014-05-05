@@ -1,0 +1,13 @@
+#Blog Post1--Yi Jiang(yj2306)
+
+##Introduction
+This is a contest we are 
+
+
+
+## Datasource
+
+I get the [data source](https://raw.githubusercontent.com/YiGinger/Myd3/master/ChinaExp.csv) from the WDI and extract only the data about China of the export of fuels, export of mineral and the total exports for each year. I firts draw the stack bar using these data. But I found that the bar is not very clear because the ratio of mineral export and fuel export against total export is very small. So even they are changing, we can really clearlly see it. So I add a pie graph to visualize the ratio so that we can clearly see the change of percentage of natural resource in all export in China.
+
+# graph
+[the graph]()
